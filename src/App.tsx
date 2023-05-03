@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Employee from "./pages/Employee/Employee";
+import Designations from "./pages/Designations/Designations";
+import LoginLayout from "./layouts/LoginLayout/LoginLayout";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import NoPage from "./pages/NoPage/NoPage";
+import DashBoard from "./layouts/DashBoard/DashBoard";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<LoginLayout />}>
+          <Route index element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+        <Route path="/dashboard" element={<DashBoard />}>
+          <Route path="/dashboard/home" element={<Home />} />
+          <Route path="/dashboard/employee" element={<Employee />} />
+          <Route path="/dashboard/designations" element={<Designations />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

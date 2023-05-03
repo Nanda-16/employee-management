@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+a,
+a:hover {
+  text-decoration: none !important;
+  font-size: 0.8em;
+  color: "inherit" !important;
+}
+
+.form-label,
+.form-control::placeholder,
+.form-control,
+.form-select,
+.form-check-label,
+.form-text,
+.btn {
+  font-size: 0.8em;
+}
