@@ -1,7 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-import { Card } from "react-bootstrap";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Container from "@mui/material/Container";
+import CardHeader from "@mui/material/CardHeader";
+import {
+  Button,
+  CardActions,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  InputLabel,
+  TextField,
+  Typography,
+  createStyles,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
+const styles: any = createStyles({
+  formControlLabel: { fontSize: "0.8rem", "& label": { fontSize: "0.8rem" } },
+});
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,73 +38,105 @@ const Login = () => {
     }
   };
 
-  const nameRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
-    nameRef.current?.focus();
+    emailRef.current?.focus();
   }, []);
 
   return (
     <>
       <div className="row justify-content-center mt-5">
-        <Card className="w-50 p-0">
-          <Card.Header className="fw-semibold">Login</Card.Header>
-          <Card.Body className="mx-4">
-            <Form className="py-4" onSubmit={handleSubmit}>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextEmail"
-              >
-                <Form.Label column sm="3">
-                  E-mail Address
-                </Form.Label>
-                <Col sm="9">
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter your E-mail"
+        <Card sx={{ maxWidth: 700, padding: "0" }} variant="outlined">
+          <CardHeader
+            title="Login"
+            disableTypography={true}
+            sx={{ bgcolor: "#00000008", borderBottom: "1px solid #0000001f" }}
+          />
+          <form onSubmit={handleSubmit}>
+            <CardContent>
+              <Grid container spacing={3} sx={{ padding: "1em" }}>
+                <Grid item xs={12} sm={3}>
+                  <InputLabel sx={{ marginTop: "0.8em", fontSize: "0.8em" }}>
+                    E-mail
+                  </InputLabel>
+                </Grid>
+                <Grid item xs={12} sm={9}>
+                  <TextField
                     required
-                    ref={nameRef}
+                    id="email"
+                    name="email"
+                    label="E-mail"
+                    fullWidth
+                    size="small"
+                    InputLabelProps={{
+                      style: { color: "#0000004f", fontSize: "0.8em" },
+                    }}
+                    autoComplete="off"
+                    variant="outlined"
+                    type="email"
+                    inputRef={emailRef}
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                   />
-                </Col>
-              </Form.Group>
-
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextPassword"
-              >
-                <Form.Label column sm="3">
-                  Password
-                </Form.Label>
-                <Col sm="9">
-                  <Form.Control
-                    type="password"
-                    minLength={8}
-                    placeholder="Password"
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <InputLabel sx={{ marginTop: "0.8em", fontSize: "0.8em" }}>
+                    Password
+                  </InputLabel>
+                </Grid>
+                <Grid item xs={12} sm={9}>
+                  <TextField
                     required
+                    id="password"
+                    name="password"
+                    label="Password"
+                    fullWidth
+                    size="small"
+                    InputLabelProps={{
+                      style: { color: "#0000004f", fontSize: "0.8em" },
+                    }}
+                    autoComplete="off"
+                    variant="outlined"
+                    type="password"
+                    inputProps={{ minLength: 8 }}
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                   />
-                </Col>
-              </Form.Group>
-              <div className="text-center">
-                <input
-                  type="checkbox"
-                  onChange={(e) => setRemember(e.currentTarget.checked)}
-                  checked={remember}
+                </Grid>{" "}
+              </Grid>
+              <div style={{}} className="text-center">
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      size="small"
+                      onChange={(e) => setRemember(e.currentTarget.checked)}
+                      checked={remember}
+                    />
+                  }
+                  label={
+                    <Typography style={styles.formControlLabel}>
+                      Remember Me
+                    </Typography>
+                  }
+                  sx={{ color: "#1976d2" }}
                 />
-                <label className="ms-1 form-label">Remember Me</label>
               </div>
-              <div className="text-center mt-3">
-                <Button variant="primary me-2" type="submit">
+            </CardContent>
+            <CardActions>
+              <Container sx={{ textAlign: "center", marginBottom: "5px" }}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  style={{ textTransform: "none" }}
+                >
                   Login
                 </Button>
-                <Card.Link href="#">Forgot Password</Card.Link>
-              </div>
-            </Form>
-          </Card.Body>
+                <Button href="#" size="small" style={{ textTransform: "none" }}>
+                  Forgot Password
+                </Button>
+              </Container>
+            </CardActions>
+          </form>
         </Card>
       </div>
     </>

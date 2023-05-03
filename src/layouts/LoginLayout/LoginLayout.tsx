@@ -1,29 +1,21 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import { NavLink, Outlet } from "react-router-dom";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 
 function LoginLayout() {
   return (
     <>
-      <Navbar
-        expand="lg"
-        sticky="top"
-        bg="white"
-        className="border-bottom"
-        style={{}}
-      >
-        <Container fluid>
-          <Navbar.Brand className="fw-semibold me-4">
-            Employee Manager
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="my-2 mx-5 my-lg-0 ms-auto"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
+      <Box sx={{ flexGrow: 1, paddingBottom: "20px" }}>
+        <AppBar sx={{ backgroundColor: "white" }}>
+          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h6" sx={{ color: "black" }}>
+              Employee Manager
+            </Typography>
+            <div style={{ display: "flex" }}>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
@@ -35,18 +27,17 @@ function LoginLayout() {
               <NavLink
                 to="/register"
                 className={({ isActive }) =>
-                  isActive
-                    ? "text-black fw-semibold"
-                    : "text-secondary fw-semibold"
+                  isActive ? "text-black fw-semibold" : "text-secondary "
                 }
               >
-                <div className={"col mx-2 "}>Register</div>
+                <div className={"col mx-2"}>Register</div>
               </NavLink>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      <main className="p-10">
+            </div>
+          </Toolbar>
+        </AppBar>{" "}
+      </Box>
+
+      <main className="p-5">
         <Outlet />
       </main>
     </>

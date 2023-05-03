@@ -1,7 +1,22 @@
 import { useEffect, useRef, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import { Card } from "react-bootstrap";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Container from "@mui/material/Container";
+import CardHeader from "@mui/material/CardHeader";
+import {
+  Button,
+  CardActions,
+  Grid,
+  InputLabel,
+  TextField,
+  Typography,
+  createStyles,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
+const styles: any = createStyles({
+  formControlLabel: { fontSize: "0.8rem", "& label": { fontSize: "0.8rem" } },
+});
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -35,97 +50,127 @@ const Register = () => {
   return (
     <>
       <div className="row justify-content-center mt-5">
-        <Card className="w-50 p-0">
-          <Card.Header className="fw-semibold">Register</Card.Header>
-          <Card.Body className="mx-4">
-            <Form className="py-4" onSubmit={handleSubmit}>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextName"
-              >
-                <Form.Label column sm="3">
-                  Name
-                </Form.Label>
-                <Col sm="9">
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter your Name"
+        <Card sx={{ maxWidth: 700, padding: "0" }} variant="outlined">
+          <CardHeader
+            title="Login"
+            disableTypography={true}
+            sx={{ bgcolor: "#00000008", borderBottom: "1px solid #0000001f" }}
+          />
+          <form onSubmit={handleSubmit}>
+            <CardContent>
+              <Grid container spacing={3} sx={{ padding: "1em" }}>
+                <Grid item xs={12} sm={3}>
+                  <InputLabel sx={{ marginTop: "0.8em", fontSize: "0.8em" }}>
+                    Name
+                  </InputLabel>
+                </Grid>
+                <Grid item xs={12} sm={9}>
+                  <TextField
                     required
-                    ref={nameRef}
+                    id="name"
+                    name="name"
+                    label="Name"
+                    fullWidth
+                    size="small"
+                    autoComplete="off"
+                    variant="outlined"
+                    inputRef={nameRef}
                     onChange={(e) => setName(e.target.value)}
                     value={name}
+                    InputLabelProps={{
+                      style: { color: "#0000004f", fontSize: "0.8em" },
+                    }}
                   />
-                </Col>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextEmail"
-              >
-                <Form.Label column sm="3">
-                  E-mail Address
-                </Form.Label>
-                <Col sm="9">
-                  <Form.Control
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <InputLabel sx={{ marginTop: "0.8em", fontSize: "0.8em" }}>
+                    E-mail
+                  </InputLabel>
+                </Grid>
+                <Grid item xs={12} sm={9}>
+                  <TextField
+                    required
+                    id="email"
+                    name="email"
+                    label="E-mail"
+                    fullWidth
+                    size="small"
+                    autoComplete="off"
+                    InputLabelProps={{
+                      style: { color: "#0000004f", fontSize: "0.8em" },
+                    }}
+                    variant="outlined"
                     type="email"
-                    placeholder="Enter your E-mail"
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
-                    required
                   />
-                </Col>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextPassword"
-              >
-                <Form.Label column sm="3">
-                  Password
-                </Form.Label>
-                <Col sm="9">
-                  <Form.Control
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <InputLabel sx={{ marginTop: "0.8em", fontSize: "0.8em" }}>
+                    Password
+                  </InputLabel>
+                </Grid>
+                <Grid item xs={12} sm={9}>
+                  <TextField
+                    required
+                    id="password"
+                    name="password"
+                    label="Password"
+                    fullWidth
+                    size="small"
+                    autoComplete="off"
+                    InputLabelProps={{
+                      style: { color: "#0000004f", fontSize: "0.8em" },
+                    }}
+                    variant="outlined"
                     type="password"
-                    minLength={8}
-                    placeholder="Password"
+                    inputProps={{ minLength: 8 }}
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-                    required
                   />
-                </Col>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextConfirmPassword"
-              >
-                <Form.Label column sm="3">
-                  Confirm Password
-                </Form.Label>
-                <Col sm="9">
-                  <Form.Control
+                </Grid>{" "}
+                <Grid item xs={12} sm={3}>
+                  <InputLabel sx={{ marginTop: "0.8em", fontSize: "0.8em" }}>
+                    Confirm Password
+                  </InputLabel>
+                </Grid>
+                <Grid item xs={12} sm={9}>
+                  <TextField
+                    required
+                    id="password"
+                    name="password"
+                    label="Password"
+                    fullWidth
+                    size="small"
+                    autoComplete="off"
+                    InputLabelProps={{
+                      style: { color: "#0000004f", fontSize: "0.8em" },
+                    }}
+                    variant="outlined"
                     type="password"
-                    minLength={8}
-                    placeholder="Confirm Password"
+                    inputProps={{ minLength: 8 }}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     value={confirmPassword}
-                    required
+                    helperText={errorMessage}
+                    // FormHelperTextProps={{
+                    //   classes={helperTextStyles.helperText,}
+                    // }}
                   />
-                  {errorMessage && (
-                    <div className="text-danger" style={{ fontSize: "0.9em" }}>
-                      <small>{errorMessage}</small>
-                    </div>
-                  )}
-                </Col>
-              </Form.Group>
-              <div className="text-center">
-                <Button variant="primary me-2" type="submit">
+                </Grid>
+              </Grid>
+            </CardContent>
+            <CardActions>
+              <Container sx={{ textAlign: "center", marginBottom: "5px" }}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  style={{ textTransform: "none" }}
+                >
                   Register
                 </Button>
-              </div>
-            </Form>
-          </Card.Body>
+              </Container>
+            </CardActions>
+          </form>
         </Card>
       </div>
     </>
