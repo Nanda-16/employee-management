@@ -9,14 +9,8 @@ import {
   Grid,
   InputLabel,
   TextField,
-  Typography,
-  createStyles,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
-const styles: any = createStyles({
-  formControlLabel: { fontSize: "0.8rem", "& label": { fontSize: "0.8rem" } },
-});
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -152,9 +146,9 @@ const Register = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     value={confirmPassword}
                     helperText={errorMessage}
-                    // FormHelperTextProps={{
-                    //   classes={helperTextStyles.helperText,}
-                    // }}
+                    FormHelperTextProps={{
+                      style:{color:'#eb0014'}
+                    }}
                   />
                 </Grid>
               </Grid>
